@@ -46,6 +46,14 @@ stages:
 
     - task: AzureIoTEdge@2
       inputs:
+        action: 'Generate deployment manifest'
+        templateFilePath: 'deployment.template.json'
+        defaultPlatform: 'amd64'
+        deploymentManifestOutputPath: '$(System.DefaultWorkingDirectory)/config/deployment.json'
+        validateGeneratedDeploymentManifest: 'false'
+
+    - task: AzureIoTEdge@2
+      inputs:
         action: 'Deploy to IoT Edge devices'
         deploymentFilePath: '$(System.DefaultWorkingDirectory)/config/deployment.json'
         azureSubscription: 'Azure for Students(d7469e1d-dda0-413e-8006-06f637159bd5)'
